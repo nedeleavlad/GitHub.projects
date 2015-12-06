@@ -13,10 +13,10 @@ namespace Sportiv
 
             Assert.AreEqual(9, number);
         }
-         
+
         int CalculateRepetitions(int n)
-        
+        {
             return (pow(n,2));
-        
+        }
     }
 }
