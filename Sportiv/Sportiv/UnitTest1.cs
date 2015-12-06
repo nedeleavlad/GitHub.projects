@@ -16,7 +16,7 @@ namespace Sportiv
          
         int CalculateRepetitions(int n)
         
-            return (n(n+1)-n);
+            return (pow(n,2));
         
     }
 }
