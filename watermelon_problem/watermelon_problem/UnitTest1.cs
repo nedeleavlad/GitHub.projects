@@ -9,7 +9,7 @@ namespace watermelon_problem
         [TestMethod]
         public void watermelonDivideTest1()
         {
-            Assert.AreEqual(1, divide_watermelon(4));
+            Assert.AreEqual("Yes, the watermelon can be divided", divide_watermelon(4));
 
 
         }
@@ -18,17 +18,26 @@ namespace watermelon_problem
         [TestMethod]
         public void watermelonDivideTest0()
         {
-            Assert.AreEqual(0, divide_watermelon(3));
+            Assert.AreEqual("The watermelon cannot be divided", divide_watermelon(3));
 
 
         }
 
 
-        int divide_watermelon(int noKg)
+        [TestMethod]
+        public void watermelonDivideTest2()
         {
-            if (noKg % 2 == 0) return 1;
+            Assert.AreEqual("The watermelon cannot be divided", divide_watermelon(2));
 
-            else return 0;
+
+        }
+
+
+        string divide_watermelon(int noKg)
+        {
+            if ((noKg % 2 == 0) && (noKg!=2)) return "Yes, the watermelon can be divided";
+
+            else return "The watermelon cannot be divided";
 
         }
     }
