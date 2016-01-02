@@ -9,13 +9,13 @@ namespace fizzBuzz
         [TestMethod]
         public void FizzTest()
         {
-            Assert.AreEqual('FIZZ', fb(6));
+            Assert.AreEqual("FIZZ", fizz(6));
         }
 
         [TestMethod]
         public void BuzzTest()
         {
-            Assert.AreEqual('BUZZ', fb(5));
+            Assert.AreEqual("BUZZ", fizz(5));
         }
 
 
@@ -23,29 +23,29 @@ namespace fizzBuzz
         [TestMethod]
         public void FizzBuzzTest()
         {
-            Assert.AreEqual('FIZZBUZZ', fb(15));
+            Assert.AreEqual("FIZZBUZZ", fizz(15));
         }
 
 
         [TestMethod]
         public void FizzBuzzTest1()
         {
-            Assert.AreEqual('The number is not fizzbuzz', fb(16));
+            Assert.AreEqual("The number is not fizzbuzz", fizz(16));
         }
 
 
     }
 
-    int fb (int number )
+    string  fizz (int number )
     {
 
-        if ((number % 3 == 0) && (number % 5 == 0)) return 'FIZZBUZZ';
+        if ((number % 3 == 0) && (number % 5 == 0)) return "FIZZBUZZ";
 
-        else if (number % 3 == 0) return 'FIZZ';
+        else if (number % 3 == 0) return "FIZZ";
 
-        else if (number % 5 == 0) return 'BUZZ';
+        else if (number % 5 == 0) return "BUZZ";
 
-        else return 'The number is not fizzbuzz';
+        else return "The number is not fizzbuzz";
 
     }
 
