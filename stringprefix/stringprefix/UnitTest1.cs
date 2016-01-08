@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace stringprefix
 {
@@ -9,27 +8,29 @@ namespace stringprefix
         [TestMethod]
         public void TestMethod1()
         {
-            Assert.AreEqual("aa", prefix("aab","aaf"));
+            Assert.AreEqual("aaa", findPrefix("aaab","aaaf"));
 
+            Assert.AreEqual("aaa", findPrefix("aaa", "aaab"));
+
+            Assert.AreEqual("", findPrefix("ss", "ggg"));
+            
         }
         
-        string prefix(string s1, string s2)
+        string findPrefix(string firstPhrase, string secondPhrase)
         {
-            string ss = string.Empty;
-            int i, j;
+            string result = string.Empty;
 
-               for(i=0;i<s1.Length;i++)
-                 {  for(j=0;j<s2.Length;j++)
-                       {   if (s1[i] == s2[j])
+            for (int i = 0; i < System.Math.Min(firstPhrase.Length, secondPhrase.Length) ;i ++)
 
-                                  {
-                                    ss+=s2[j];
-                                   }
-                        }
+            {    if (firstPhrase[i] == secondPhrase[i]) result += firstPhrase[i];
+                else break;
 
 
-                  }
-            return ss;
+            }
+
+
+                  
+            return result;
 
         }
 
