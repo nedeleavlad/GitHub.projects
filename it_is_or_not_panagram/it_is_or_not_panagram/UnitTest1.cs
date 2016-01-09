@@ -15,11 +15,11 @@ namespace it_is_or_not_panagram
 
         string FindPanagram(string phrase)
         {
-
+            
 
             for (int j = 0; j < phrase.Length; j++)
             {
-                if (FindLetter(j) = false) return "false";
+                if (FindLetter(phrase[j]) == false) return "false";
                            else return "true";
 
 
@@ -28,7 +28,7 @@ namespace it_is_or_not_panagram
         }
 
 
-        bool FindLetter(string letter)
+        bool FindLetter(char letter)
         {
             string alphabet = "abcdefghijklmnopqrstuvwxyz";
 
