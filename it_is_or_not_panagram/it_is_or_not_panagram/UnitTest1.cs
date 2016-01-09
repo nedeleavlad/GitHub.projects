@@ -8,34 +8,44 @@ namespace it_is_or_not_panagram
         [TestMethod]
         public void TestMethod1()
         {
-            Assert.AreEqual("true", findPanagram("The quick brown fox jumps over the lazy dog"));
+            Assert.AreEqual("true", FindPanagram("The quick brown fox jumps over the lazy dog"));
 
-            
+            Assert.AreEqual("false", FindPanagram("aaaa"));
         }
 
-        string findPanagram(string phrase)
+        string FindPanagram(string phrase)
+        {
+
+
+            for (int j = 0; j < phrase.Length; j++)
+            {
+                if (FindLetter(j) = false) return "false";
+                           else return "true";
+
+
+
+            }
+        }
+
+
+        bool FindLetter(string letter)
         {
             string alphabet = "abcdefghijklmnopqrstuvwxyz";
 
-            int contor = 0;
-
-            for (int i = 0; i < alphabet.Length; i++)
+            for(int i=0;i<alphabet.Length;i++)
             {
-                for (int j = 0; j < phrase.Length; j++)
-                {
-                    if (alphabet[i] == phrase[j]) contor++;
+                if (letter == alphabet[i]) return true;
+                else return false;
 
 
-                }
-              
+            }
 
-           }
-
-            if (contor == alphabet.Length) return "true";
-            else return "false";
 
 
         }
+
+
+
 
 
     }
