@@ -9,17 +9,17 @@ namespace number_of_anagrams
         [TestMethod]
         public void TestMethod1()
         {
-            Assert.AreEqual(6, GetTheNumberOfAnagram("asd"));
-            Assert.AreEqual(30, GetTheNumberOfAnagram("aabbf"));
+            Assert.AreEqual(6, CalculateNumberofAnagram("asd"));
+            Assert.AreEqual(30, CalculateNumberofAnagram("aabbf"));
         }
 
-        int GetTheNumberOfAnagram(string Word)
+        int CalculateNumberofAnagram(string word)
         {
-            string LowerCase = Word.ToLower();
+            string LowerCase = word.ToLower();
             int result;
-            if (Word.Length == 0)
+            if (word.Length == 0)
                 return 0;
-            result = GetTheFactorial(LowerCase.Length) / CountRepeatedChars(LowerCase);
+            result = CalculateFactorial(LowerCase.Length) / CountRepeatedChars(LowerCase);
             return result;
         }
 
@@ -28,30 +28,30 @@ namespace number_of_anagrams
         {
             int result = 0;
             int p = 1;
-            for (char charToCheck = 'a'; charToCheck <= 'z'; charToCheck++)
+            for (char curentChar = 'a'; curentChar <= 'z'; curentChar++)
             {
-                result = CountChars(string1, charToCheck);
-                p *= GetTheFactorial(result);
+                result = CountChars(string1, curentChar);
+                p *= CalculateFactorial(result);
             }
             return p;
         }
 
-        private static int CountChars(string sstring, char charToCheck)
+        private static int CountChars(string sstring, char curentChar)
         {
             int result = 0;
             for (int i = 0; i < sstring.Length; i++)
             {
-                if (sstring[i] == charToCheck)
+                if (sstring[i] == curentChar)
                 {
                     result++;
                 }
             }
             return result;
         }
-        int GetTheFactorial(int length)
+        int CalculateFactorial(int Length)
         {
             int Number = 1;
-            for (int i = 1; i <= length; i++)
+            for (int i = 1; i <= Length; i++)
             {
                 Number *= i;
             }
