@@ -55,7 +55,7 @@ namespace number_of_anagrams
             {
                 Number *= i;
             }
-            return Number;
+            return  Number;
         }
 
 
