@@ -7,9 +7,14 @@ namespace number_of_anagrams
     public class UnitTest1
     {
         [TestMethod]
-        public void TestMethod1()
+        public void GetNumberofAnagramsforDifferentCharacters()
         {
             Assert.AreEqual(6, CalculateNumberofAnagram("asd"));
+            Assert.AreEqual(30, CalculateNumberofAnagram("aabbf"));
+        }
+        [TestMethod]
+        public void GetNumberofAnagramsforSameCharacters()
+        {
             Assert.AreEqual(30, CalculateNumberofAnagram("aabbf"));
         }
 
@@ -55,7 +60,7 @@ namespace number_of_anagrams
             {
                 Number *= i;
             }
-            return  Number;
+            return Number;
         }
 
 
