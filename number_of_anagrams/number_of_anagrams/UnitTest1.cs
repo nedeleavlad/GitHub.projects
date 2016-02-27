@@ -7,10 +7,10 @@ namespace number_of_anagrams
     public class UnitTest1
     {
         [TestMethod]
-        public void GetNumberofAnagramsforDifferentCharacters()
+        public void GetNumberofAnagrams1()
         {
-            Assert.AreEqual(6, CalculateNumberofAnagram("asd"));
-            Assert.AreEqual(30, CalculateNumberofAnagram("aabbf"));
+            Assert.AreEqual(3, CalculateNumberofAnagram("aab"));
+           
         }
         [TestMethod]
         public void GetNumberofAnagramsforSameCharacters()
@@ -29,24 +29,24 @@ namespace number_of_anagrams
         }
 
 
-        int CountRepeatedChars(string string1)
+        int CountRepeatedChars(string givenString)
         {
             int result = 0;
             int p = 1;
             for (char curentChar = 'a'; curentChar <= 'z'; curentChar++)
             {
-                result = CountChars(string1, curentChar);
+                result = CountChars(givenString, curentChar);
                 p *= CalculateFactorial(result);
             }
             return p;
         }
 
-        private static int CountChars(string sstring, char curentChar)
+        private static int CountChars(string curentString, char curentChar)
         {
             int result = 0;
-            for (int i = 0; i < sstring.Length; i++)
+            for (int i = 0; i < curentString.Length; i++)
             {
-                if (sstring[i] == curentChar)
+                if (curentString[i] == curentChar)
                 {
                     result++;
                 }
