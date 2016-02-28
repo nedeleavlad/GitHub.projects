@@ -9,7 +9,7 @@ namespace loto_649
         [TestMethod]
         public void CalculateProbability2()
         {
-            Assert.AreEqual(1.84498995124078E-05, GetProbability(49, 6, 5));
+            Assert.AreEqual(1.84498995124078E-05, GetProbability(49, 6, 5),1E-5);
         }
         [TestMethod]
         public void CalculateCombinations()
@@ -19,7 +19,7 @@ namespace loto_649
         [TestMethod]
         public void CalculateProbability1()
         {
-            Assert.AreEqual(7.15112384201852E-08, GetProbability(49, 6, 6));
+            Assert.AreEqual(7.15112384201852E-08, GetProbability(49, 6, 6),1E-5);
         }
 
         double GetFactorial(int number)
@@ -35,24 +35,15 @@ namespace loto_649
 
         double GetCombinations(int number, int howMany)
         {
-
-            double result = 0;
-
-            result += (GetFactorial(number) / (GetFactorial(howMany) * GetFactorial(number - howMany)));
+            double result = (GetFactorial(number) / (GetFactorial(howMany) * GetFactorial(number - howMany)));
 
             return result;
         }
 
 
-
-
         double GetProbability(int numberoftheBalls, int noBallsSingleTicket, int noBallsWinningTicket)
         {
-            double probability = 0;
-
-            probability = probability + ((GetCombinations(noBallsSingleTicket, noBallsWinningTicket) * GetCombinations(numberoftheBalls - noBallsSingleTicket, noBallsSingleTicket - noBallsWinningTicket)) / GetCombinations(numberoftheBalls, noBallsSingleTicket));
-
-
+            double probability = +((GetCombinations(noBallsSingleTicket, noBallsWinningTicket) * GetCombinations(numberoftheBalls - noBallsSingleTicket, noBallsSingleTicket - noBallsWinningTicket)) / GetCombinations(numberoftheBalls, noBallsSingleTicket));
 
             return probability;
         }
