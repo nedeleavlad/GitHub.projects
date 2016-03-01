@@ -9,11 +9,11 @@ namespace BinaryConversion
         [TestMethod]
         public void BinaryConverionfor61()
         {
-            Assert.AreEqual(new byte[] { 1,1,1,1,0,1}, GetConversiontoBinary(61));
+            CollectionAssert.AreEqual(new byte[] { 1,1,1,1,0,1}, GetConversionToBinary(61));
 
         }
 
-        byte[] GetConversiontoBinary(int number)
+        byte[] GetConversionToBinary(int number)
         {
             byte[] byteArray = new byte[0];
 
