@@ -55,7 +55,7 @@ namespace BinaryConversion
         }
 
         [TestMethod]
-        public void MyTestMethod()
+        public void IndicatePosition()
         {
             Assert.AreEqual(2, GetPosition(new byte[] { 1, 2, 3, 4 }, 2));
         }
@@ -69,6 +69,26 @@ namespace BinaryConversion
             return 0;
         }
 
+        [TestMethod]
+        public void GetOperationAND()
+        {
+            CollectionAssert.AreEqual(GetConversionToBinary(10),OperationAND(GetConversionToBinary(10), GetConversionToBinary(10)));
+        }
+
+
+
+       byte[] OperationAND(byte[] firstArray, byte[] secondArray)
+        {
+            byte[] result = new byte[Math.Max(firstArray.Length, secondArray.Length)];
+
+            for(int i=0;i<result.Length;i++)
+            {
+                result[i]= (GetPosition(firstArray, i) == 1 && GetPosition(secondArray,i) == 1) ? (byte)1 : (byte)0;
+
+            }
+            Array.Reverse(result);
+            return result;
+        }
 
 
     }
