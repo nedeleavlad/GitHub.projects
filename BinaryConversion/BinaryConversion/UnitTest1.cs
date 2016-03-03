@@ -72,23 +72,67 @@ namespace BinaryConversion
         [TestMethod]
         public void GetOperationAND()
         {
-            CollectionAssert.AreEqual(GetConversionToBinary(10),OperationAND(GetConversionToBinary(10), GetConversionToBinary(10)));
+            CollectionAssert.AreEqual(GetConversionToBinary(10), GetOperationAND(GetConversionToBinary(10), GetConversionToBinary(10)));
         }
 
 
 
-       byte[] OperationAND(byte[] firstArray, byte[] secondArray)
+        byte[] GetOperationAND(byte[] firstArray, byte[] secondArray)
         {
             byte[] result = new byte[Math.Max(firstArray.Length, secondArray.Length)];
 
-            for(int i=0;i<result.Length;i++)
+            for (int i = 0; i < result.Length; i++)
             {
-                result[i]= (GetPosition(firstArray, i) == 1 && GetPosition(secondArray,i) == 1) ? (byte)1 : (byte)0;
+                result[i] = (GetPosition(firstArray, i) == 1 && GetPosition(secondArray, i) == 1) ? (byte)1 : (byte)0;
 
             }
             Array.Reverse(result);
             return result;
         }
+
+        [TestMethod]
+        public void GetOperationOR()
+        {
+            CollectionAssert.AreEqual(GetConversionToBinary(7), GetOperationOR(GetConversionToBinary(5), GetConversionToBinary(3)));
+        }
+
+
+
+        byte[] GetOperationOR(byte[] firstArray, byte[] secondArray)
+        {
+            byte[] result = new byte[Math.Max(firstArray.Length, secondArray.Length)];
+
+            for (int i = 0; i < result.Length; i++)
+            {
+                result[i] = (GetPosition(firstArray, i) == 1 || GetPosition(secondArray, i) == 1) ? (byte)(1) : (byte)(0);
+
+
+            }
+            Array.Reverse(result);
+            return result;
+        }
+
+        [TestMethod]
+        public void GetOperationXOR()
+        {
+            CollectionAssert.AreEqual(GetConversionToBinary(6), GetOperationXOR(GetConversionToBinary(5), GetConversionToBinary(3)));
+
+        }
+        
+        byte[] GetOperationXOR(byte[] firstArray, byte[] secondArray)
+        {
+            byte[] result = new byte[Math.Max(firstArray.Length, secondArray.Length)];
+
+        for(int i=0;i<result.Length;i++)
+            {
+                result[i]= (GetPosition(firstArray, i) != GetPosition(secondArray, i)) ? (byte)(1) : (byte)(0);
+
+
+            }
+            Array.Reverse(result);
+            return result;
+        }
+
 
 
     }
