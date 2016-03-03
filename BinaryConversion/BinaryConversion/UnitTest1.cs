@@ -17,14 +17,12 @@ namespace BinaryConversion
         {
             byte[] byteArray = new byte[0];
 
-            int contor = 0;
-
             while (number > 0)
             {
                 Array.Resize(ref byteArray, byteArray.Length + 1);
 
-                byteArray[contor] = (byte)(number % 2);
-                contor += 1;
+                byteArray[byteArray.Length - 1] = (byte)(number % 2);
+
                 number = number / 2;
             }
 
@@ -42,15 +40,35 @@ namespace BinaryConversion
 
         byte[] GetOperationNOT(byte[] byteArray)
         {
+            byte[] result = new byte[0];
 
-            for (int j = 0; j < byteArray.Length; j++)
+            for (int i = 0; i < byteArray.Length; i++)
+
             {
-                if (byteArray[j] == 1) byteArray[j] = 0;
-                else byteArray[j] = 1;
+                Array.Resize(ref result, result.Length + 1);
+
+                result[i] = ((byteArray[i]) == 1) ? ((byte)0) : ((byte)1);
+
             }
 
-            return byteArray;
+            return result;
         }
+
+        [TestMethod]
+        public void MyTestMethod()
+        {
+            Assert.AreEqual(2, GetPosition(new byte[] { 1, 2, 3, 4 }, 2));
+        }
+
+
+        byte GetPosition(byte[] array, int position)
+        {
+            if (position < array.Length)
+                return array[array.Length - position - 1];
+
+            return 0;
+        }
+
 
 
     }
