@@ -12,6 +12,79 @@ namespace BinaryConversion
             CollectionAssert.AreEqual(new byte[] { 1, 1, 1, 1, 0, 1 }, GetConversionToBinary(61));
         }
 
+        [TestMethod]
+        public void GetOperationAND()
+        {
+            CollectionAssert.AreEqual(GetConversionToBinary(10), GetOperationAND(GetConversionToBinary(10), GetConversionToBinary(10)));
+        }
+
+        [TestMethod]
+        public void GetOperationOR()
+        {
+            CollectionAssert.AreEqual(GetConversionToBinary(7), GetOperationOR(GetConversionToBinary(5), GetConversionToBinary(3)));
+        }
+
+        [TestMethod]
+        public void GetOperationXOR()
+        {
+            CollectionAssert.AreEqual(GetConversionToBinary(6), GetOperationXOR(GetConversionToBinary(5), GetConversionToBinary(3)));
+        }
+
+        [TestMethod]
+        public void IndicatePosition()
+        {
+            Assert.AreEqual(2, GetPosition(new byte[] { 1, 2, 3, 4 }, 2));
+        }
+
+        [TestMethod]
+        public void LeftShift()
+        {
+            CollectionAssert.AreEqual(GetConversionToBinary(45 << 1), GetLeftShift(GetConversionToBinary(45), 1));
+        }
+
+        [TestMethod]
+        public void OperationNOT()
+        {
+            CollectionAssert.AreEqual(new byte[] { 0, 0, 0, 0, 1, 0 }, GetOperationNOT(GetConversionToBinary(61)));
+        }
+
+        [TestMethod]
+        public void RightShift()
+        {
+            CollectionAssert.AreEqual(GetConversionToBinary(15 >> 2), GetRightShift(GetConversionToBinary(15), 2));
+        }
+
+        private byte[] ExecuteLogicOperation(byte[] firstArray, byte[] secondArray, string getOperator)
+        {
+            byte[] result = new byte[Math.Max(firstArray.Length, secondArray.Length)];
+            for (int i = 0; i < result.Length; i++)
+            {
+                result[i] = GetCases(GetPosition(firstArray, i), GetPosition(secondArray, i), getOperator, result);
+            }
+            Array.Reverse(result);
+            result = RemoveZeroes(result);
+            return result;
+        }
+
+        private byte GetCases(byte firstByte, byte secondByte, string getoperator, byte[] result)
+        {
+            switch (getoperator)
+            {
+                case "AND":
+                    result = (firstByte == 1) && (secondByte == 1) ? (byte)1 : (byte)0;
+                    break;
+
+                case "OR":
+                    result = (firstByte == 1) || secondByte == 1) ? (byte)(1) : (byte)(0);
+                    break;
+
+                case "XOR":
+                    result = (firstByte) != (secondByte) ? (byte)(1) : (byte)(0);
+                    break;
+            }
+            return 0;
+        }
+
         private byte[] GetConversionToBinary(int number)
         {
             byte[] byteArray = new byte[0];
@@ -32,10 +105,16 @@ namespace BinaryConversion
             return byteArray;
         }
 
-        [TestMethod]
-        public void OperationNOT()
+        private byte[] GetLeftShift(byte[] array, int digits)
         {
-            CollectionAssert.AreEqual(new byte[] { 0, 0, 0, 0, 1, 0 }, GetOperationNOT(GetConversionToBinary(61)));
+            Array.Resize(ref array, array.Length + digits);
+
+            return array;
+        }
+
+        private byte[] GetOperationAND(byte[] firstArray, byte[] secondArray)
+        {
+            return ExecuteLogicOperation(firstArray, secondArray, "AND");
         }
 
         private byte[] GetOperationNOT(byte[] byteArray)
@@ -53,10 +132,14 @@ namespace BinaryConversion
             return result;
         }
 
-        [TestMethod]
-        public void IndicatePosition()
+        private byte[] GetOperationOR(byte[] firstArray, byte[] secondArray)
         {
-            Assert.AreEqual(2, GetPosition(new byte[] { 1, 2, 3, 4 }, 2));
+            return ExecuteLogicOperation(firstArray, secondArray, "OR");
+        }
+
+        private byte[] GetOperationXOR(byte[] firstArray, byte[] secondArray)
+        {
+            return ExecuteLogicOperation(firstArray, secondArray, "XOR");
         }
 
         private byte GetPosition(byte[] array, int position)
@@ -67,66 +150,29 @@ namespace BinaryConversion
             return 0;
         }
 
-        [TestMethod]
-        public void GetOperationAND()
+        private byte[] GetRightShift(byte[] array, int position)
         {
-            CollectionAssert.AreEqual(GetConversionToBinary(10), GetOperationAND(GetConversionToBinary(10), GetConversionToBinary(10)));
+            Array.Reverse(array);
+
+            Array.Resize(ref array, array.Length - position);
+
+            Array.Reverse(array);
+
+            return array;
         }
 
-        private byte[] GetOperationAND(byte[] firstArray, byte[] secondArray)
+        private byte[] RemoveZeroes(byte[] bytes)
         {
-            return ExecuteLogicOperation(firstArray, secondArray, "AND");
-        }
-
-        [TestMethod]
-        public void GetOperationOR()
-        {
-            CollectionAssert.AreEqual(GetConversionToBinary(7), GetOperationOR(GetConversionToBinary(5), GetConversionToBinary(3)));
-        }
-
-        private byte[] GetOperationOR(byte[] firstArray, byte[] secondArray)
-        {
-            return ExecuteLogicOperation(firstArray, secondArray, "OR");
-        }
-
-        [TestMethod]
-        public void GetOperationXOR()
-        {
-            CollectionAssert.AreEqual(GetConversionToBinary(6), GetOperationXOR(GetConversionToBinary(5), GetConversionToBinary(3)));
-        }
-
-        private byte[] GetOperationXOR(byte[] firstArray, byte[] secondArray)
-        {
-            return ExecuteLogicOperation(firstArray, secondArray, "XOR");
-        }
-
-        private void GetCases(byte[] firstArray, byte[] secondArray, string getoperator, byte[] result, int i)
-        {
-            switch (getoperator)
+            int counter = 0;
+            for (int i = 0; i < bytes.Length; i++)
             {
-                case "AND":
-                    result[i] = (GetPosition(firstArray, i) == 1 && GetPosition(secondArray, i) == 1) ? (byte)1 : (byte)0;
-                    break;
-
-                case "OR":
-                    result[i] = (GetPosition(firstArray, i) == 1 || GetPosition(secondArray, i) == 1) ? (byte)(1) : (byte)(0);
-                    break;
-
-                case "XOR":
-                    result[i] = (GetPosition(firstArray, i) != GetPosition(secondArray, i)) ? (byte)(1) : (byte)(0);
+                if (bytes[i] == 0)
+                    counter++;
+                else
                     break;
             }
-        }
-
-        private byte[] ExecuteLogicOperation(byte[] firstArray, byte[] secondArray, string getOperator)
-        {
-            byte[] result = new byte[Math.Max(firstArray.Length, secondArray.Length)];
-            for (int i = 0; i < result.Length; i++)
-            {
-                GetCases(firstArray, secondArray, getOperator, result, i);
-            }
-            Array.Reverse(result);
-            return result;
+            bytes = GetRightShift(bytes, counter);
+            return bytes;
         }
     }
 }
