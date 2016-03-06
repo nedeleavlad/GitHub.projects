@@ -68,20 +68,16 @@ namespace BinaryConversion
 
         private byte GetCases(byte firstByte, byte secondByte, string getoperator)
         {
-            byte result;
             switch (getoperator)
             {
                 case "AND":
-                    result = (firstByte == 1) && (secondByte == 1) ? (byte)1 : (byte)0;
-                    break;
+                    return (firstByte == 1) && (secondByte == 1) ? (byte)1 : (byte)0;
 
                 case "OR":
-                    result = (firstByte == 1) || (secondByte == 1) ? (byte)1 : (byte)(0);
-                    break;
+                    return (firstByte == 1) || (secondByte == 1) ? (byte)1 : (byte)(0);
 
                 case "XOR":
-                    result = (firstByte) != (secondByte) ? (byte)(1) : (byte)(0);
-                    break;
+                    return (firstByte) != (secondByte) ? (byte)(1) : (byte)(0);
             }
             return 0;
         }
