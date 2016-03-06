@@ -59,15 +59,16 @@ namespace BinaryConversion
             byte[] result = new byte[Math.Max(firstArray.Length, secondArray.Length)];
             for (int i = 0; i < result.Length; i++)
             {
-                result[i] = GetCases(GetPosition(firstArray, i), GetPosition(secondArray, i), getOperator, result);
+                result[i] = GetCases(GetPosition(firstArray, i), GetPosition(secondArray, i), getOperator);
             }
             Array.Reverse(result);
             result = RemoveZeroes(result);
             return result;
         }
 
-        private byte GetCases(byte firstByte, byte secondByte, string getoperator, byte[] result)
+        private byte GetCases(byte firstByte, byte secondByte, string getoperator)
         {
+            byte result;
             switch (getoperator)
             {
                 case "AND":
@@ -75,7 +76,7 @@ namespace BinaryConversion
                     break;
 
                 case "OR":
-                    result = (firstByte == 1) || secondByte == 1) ? (byte)(1) : (byte)(0);
+                    result = (firstByte == 1) || (secondByte == 1) ? (byte)1 : (byte)(0);
                     break;
 
                 case "XOR":
