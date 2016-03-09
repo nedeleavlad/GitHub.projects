@@ -171,5 +171,24 @@ namespace BinaryConversion
             bytes = GetRightShift(bytes, counter);
             return bytes;
         }
+
+        [TestMethod]
+        public void GetOperationLessThan()
+        {
+            Assert.IsTrue(GetLessThanOperation(GetConversionToBinary(1), GetConversionToBinary(5)));
+        }
+
+        private bool GetLessThanOperation(byte[] firstByte, byte[] secondByte)
+        {
+            byte[] emptyArray = new byte[0];
+            for (int i = Math.Max(firstByte.Length, secondByte.Length) - 1; i >= 0; i--)
+            {
+                if (GetPosition(firstByte, i) < GetPosition(secondByte, i))
+                    return true;
+                if (GetPosition(firstByte, i) > GetPosition(secondByte, i))
+                    return false;
+            }
+            return false;
+        }
     }
 }
