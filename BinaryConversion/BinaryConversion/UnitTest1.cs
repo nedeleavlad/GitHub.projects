@@ -13,9 +13,41 @@ namespace BinaryConversion
         }
 
         [TestMethod]
+        public void GetEqual()
+        {
+            Assert.IsTrue(GetEqualOperation(GetConversionToBinary(14), GetConversionToBinary(14)));
+            Assert.IsFalse(GetEqualOperation(GetConversionToBinary(9), GetConversionToBinary(8)));
+        }
+
+        [TestMethod]
+        public void GetNotEqual()
+        {
+            Assert.IsTrue(GetNotEqualOperation(GetConversionToBinary(3), GetConversionToBinary(7)));
+            Assert.IsFalse(GetNotEqualOperation(GetConversionToBinary(14), GetConversionToBinary(14)));
+        }
+
+        [TestMethod]
         public void GetOperationAND()
         {
             CollectionAssert.AreEqual(GetConversionToBinary(10), GetOperationAND(GetConversionToBinary(10), GetConversionToBinary(10)));
+        }
+
+        [TestMethod]
+        public void GetOperationGreaterThan()
+        {
+            Assert.IsTrue(GetGreaterThanOperation(GetConversionToBinary(6), GetConversionToBinary(2)));
+            Assert.IsFalse(GetGreaterThanOperation(GetConversionToBinary(6), GetConversionToBinary(80)));
+            Assert.IsFalse(GetGreaterThanOperation(GetConversionToBinary(8), GetConversionToBinary(8)));
+        }
+
+        [TestMethod]
+        public void GetOperationLessThan()
+        {
+            Assert.IsTrue(GetLessThanOperation(GetConversionToBinary(1), GetConversionToBinary(5)));
+
+            Assert.IsFalse(GetLessThanOperation(GetConversionToBinary(60), GetConversionToBinary(5)));
+
+            Assert.IsFalse(GetLessThanOperation(GetConversionToBinary(5), GetConversionToBinary(5)));
         }
 
         [TestMethod]
@@ -102,11 +134,39 @@ namespace BinaryConversion
             return byteArray;
         }
 
+        private bool GetEqualOperation(byte[] bytesOne, byte[] bytesTwo)
+        {
+            return !(GetNotEqualOperation(bytesOne, bytesTwo));
+        }
+
+        private bool GetGreaterThanOperation(byte[] bytesOne, byte[] bytesTwo)
+        {
+            return GetLessThanOperation(bytesTwo, bytesOne);
+        }
+
         private byte[] GetLeftShift(byte[] array, int digits)
         {
             Array.Resize(ref array, array.Length + digits);
 
             return array;
+        }
+
+        private bool GetLessThanOperation(byte[] firstByte, byte[] secondByte)
+        {
+            byte[] emptyArray = new byte[0];
+            for (int i = Math.Max(firstByte.Length, secondByte.Length) - 1; i >= 0; i--)
+            {
+                if (GetPosition(firstByte, i) < GetPosition(secondByte, i))
+                    return true;
+                if (GetPosition(firstByte, i) > GetPosition(secondByte, i))
+                    return false;
+            }
+            return false;
+        }
+
+        private bool GetNotEqualOperation(byte[] bytesOne, byte[] bytesTwo)
+        {
+            return (GetLessThanOperation(bytesOne, bytesTwo) || GetGreaterThanOperation(bytesOne, bytesTwo));
         }
 
         private byte[] GetOperationAND(byte[] firstArray, byte[] secondArray)
@@ -149,11 +209,7 @@ namespace BinaryConversion
 
         private byte[] GetRightShift(byte[] array, int position)
         {
-            Array.Reverse(array);
-
             Array.Resize(ref array, array.Length - position);
-
-            Array.Reverse(array);
 
             return array;
         }
@@ -163,32 +219,11 @@ namespace BinaryConversion
             int counter = 0;
             for (int i = 0; i < bytes.Length; i++)
             {
-                if (bytes[i] == 0)
-                    counter++;
-                else
-                    break;
+                if (!(bytes[i] == 0)) break;
+                counter++;
             }
             bytes = GetRightShift(bytes, counter);
             return bytes;
-        }
-
-        [TestMethod]
-        public void GetOperationLessThan()
-        {
-            Assert.IsTrue(GetLessThanOperation(GetConversionToBinary(1), GetConversionToBinary(5)));
-        }
-
-        private bool GetLessThanOperation(byte[] firstByte, byte[] secondByte)
-        {
-            byte[] emptyArray = new byte[0];
-            for (int i = Math.Max(firstByte.Length, secondByte.Length) - 1; i >= 0; i--)
-            {
-                if (GetPosition(firstByte, i) < GetPosition(secondByte, i))
-                    return true;
-                if (GetPosition(firstByte, i) > GetPosition(secondByte, i))
-                    return false;
-            }
-            return false;
         }
     }
 }
