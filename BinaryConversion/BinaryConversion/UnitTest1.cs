@@ -7,6 +7,14 @@ namespace BinaryConversion
     public class UnitTest1
     {
         [TestMethod]
+        public void AditionOperation()
+        {
+            CollectionAssert.AreEqual(GetConversionToBinary(12), GetAdition(GetConversionToBinary(10), GetConversionToBinary(2)));
+
+            CollectionAssert.AreEqual(GetConversionToBinary(23), GetAdition(GetConversionToBinary(15), GetConversionToBinary(8)));
+        }
+
+        [TestMethod]
         public void BinaryConversionfor61()
         {
             CollectionAssert.AreEqual(new byte[] { 1, 1, 1, 1, 0, 1 }, GetConversionToBinary(61));
@@ -95,6 +103,27 @@ namespace BinaryConversion
             }
             Array.Reverse(result);
             result = RemoveZeroes(result);
+            return result;
+        }
+
+        private byte[] GetAdition(byte[] firstByteArray, byte[] secondByteArray)
+        {
+            byte[] result = new byte[Math.Max(secondByteArray.Length, firstByteArray.Length)];
+            int counter = 0;
+            for (int i = 0; i < result.Length; i++)
+            {
+                var sum = (GetPosition(firstByteArray, i) + GetPosition(secondByteArray, i) + counter);
+                result[i] = (byte)(sum % 2);
+                counter = sum / 2;
+            }
+
+            if (counter == 1)
+            {
+                Array.Resize(ref result, result.Length + 1);
+                result[result.Length - 1] = (byte)counter;
+            }
+
+            Array.Reverse(result);
             return result;
         }
 
