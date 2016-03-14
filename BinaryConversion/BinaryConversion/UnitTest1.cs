@@ -254,5 +254,31 @@ namespace BinaryConversion
             bytes = GetRightShift(bytes, counter);
             return bytes;
         }
+
+        [TestMethod]
+        public void OperationSubstraction()
+        {
+            CollectionAssert.AreEqual(GetConversionToBinary(10), GetOperationSubstraction(GetConversionToBinary(15), GetConversionToBinary(5)));
+        }
+
+        private byte[] GetOperationSubstraction(byte[] firstByteArray, byte[] secondByteArray)
+        {
+            byte[] result = new byte[Math.Max(secondByteArray.Length, firstByteArray.Length)];
+            int counter = 0;
+            for (int i = 0; i < result.Length; i++)
+            {
+                var substract = GetPosition(firstByteArray, i) - GetPosition(secondByteArray, i) - counter;
+                result[i] = (byte)(substract % 2);
+                if (substract < 2)
+                {
+                    counter = 1;
+                }
+                else counter = 0;
+            }
+            Array.Reverse(result);
+            result = RemoveZeroes(result);
+
+            return result;
+        }
     }
 }
