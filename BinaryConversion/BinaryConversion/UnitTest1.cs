@@ -89,6 +89,12 @@ namespace BinaryConversion
         }
 
         [TestMethod]
+        public void OperationSubstraction()
+        {
+            CollectionAssert.AreEqual(GetConversionToBinary(10), GetOperationSubstraction(GetConversionToBinary(15), GetConversionToBinary(5)));
+        }
+
+        [TestMethod]
         public void RightShift()
         {
             CollectionAssert.AreEqual(GetConversionToBinary(15 >> 2), GetRightShift(GetConversionToBinary(15), 2));
@@ -223,6 +229,22 @@ namespace BinaryConversion
             return ExecuteLogicOperation(firstArray, secondArray, "OR");
         }
 
+        private byte[] GetOperationSubstraction(byte[] firstByteArray, byte[] secondByteArray)
+        {
+            byte[] result = new byte[Math.Max(secondByteArray.Length, firstByteArray.Length)];
+            int counter = 0;
+            for (int i = 0; i < result.Length; i++)
+            {
+                var substract = 2 + GetPosition(firstByteArray, i) - GetPosition(secondByteArray, i) - counter;
+                result[i] = (byte)(substract % 2);
+                counter = (substract < 2) ? 1 : 0;
+            }
+            Array.Reverse(result);
+            result = RemoveZeroes(result);
+
+            return result;
+        }
+
         private byte[] GetOperationXOR(byte[] firstArray, byte[] secondArray)
         {
             return ExecuteLogicOperation(firstArray, secondArray, "XOR");
@@ -253,32 +275,6 @@ namespace BinaryConversion
             }
             bytes = GetRightShift(bytes, counter);
             return bytes;
-        }
-
-        [TestMethod]
-        public void OperationSubstraction()
-        {
-            CollectionAssert.AreEqual(GetConversionToBinary(10), GetOperationSubstraction(GetConversionToBinary(15), GetConversionToBinary(5)));
-        }
-
-        private byte[] GetOperationSubstraction(byte[] firstByteArray, byte[] secondByteArray)
-        {
-            byte[] result = new byte[Math.Max(secondByteArray.Length, firstByteArray.Length)];
-            int counter = 0;
-            for (int i = 0; i < result.Length; i++)
-            {
-                var substract = GetPosition(firstByteArray, i) - GetPosition(secondByteArray, i) - counter;
-                result[i] = (byte)(substract % 2);
-                if (substract < 2)
-                {
-                    counter = 1;
-                }
-                else counter = 0;
-            }
-            Array.Reverse(result);
-            result = RemoveZeroes(result);
-
-            return result;
         }
     }
 }
