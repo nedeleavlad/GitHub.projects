@@ -285,15 +285,33 @@ namespace BinaryConversion
 
         private byte[] GetOperationMultiplication(byte[] firstArray, byte[] secondArray)
         {
-            byte[] result = new byte[Math.Max(secondArray.Length, firstArray.Length)];
+            byte[] result = new byte[0];
             while (GetNotEqualOperation(firstArray, new byte[] { 0 }))
             {
                 result = GetOperationAdition(secondArray, result);
                 firstArray = GetOperationSubstraction(firstArray, new byte[] { 1 });
             }
 
-            result = RemoveZeroes(result);
+            return result;
+        }
 
+        [TestMethod]
+        public void OperationDivision()
+        {
+            CollectionAssert.AreEqual(GetConversionToBinary(11), GetOperationDivision(GetConversionToBinary(22), GetConversionToBinary(2)));
+            CollectionAssert.AreEqual(new byte[] { 0 }, GetOperationDivision(GetConversionToBinary(5), GetConversionToBinary(7)));
+        }
+
+        private byte[] GetOperationDivision(byte[] firstByte, byte[] secondByte)
+        {
+            byte[] result = new byte[firstByte.Length];
+            if (GetLessThanOperation(firstByte, secondByte))
+                return new byte[] { 0 };
+            while (GetGreaterThanOperation(firstByte, secondByte) || GetEqualOperation(firstByte, secondByte))
+            {
+                firstByte = GetOperationSubstraction(firstByte, secondByte);
+                result = GetOperationAdition(result, new byte[] { 1 });
+            }
             return result;
         }
     }
