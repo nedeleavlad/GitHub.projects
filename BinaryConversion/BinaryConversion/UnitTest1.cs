@@ -285,7 +285,7 @@ namespace BinaryConversion
 
         private byte[] GetOperationMultiplication(byte[] firstArray, byte[] secondArray)
         {
-            byte[] result = new byte[0];
+            byte[] result;
             while (GetNotEqualOperation(firstArray, new byte[] { 0 }))
             {
                 result = GetOperationAdition(secondArray, result);
@@ -304,7 +304,7 @@ namespace BinaryConversion
 
         private byte[] GetOperationDivision(byte[] firstByte, byte[] secondByte)
         {
-            byte[] result = new byte[firstByte.Length];
+            byte[] result;
             if (GetLessThanOperation(firstByte, secondByte))
                 return new byte[] { 0 };
             while (GetGreaterThanOperation(firstByte, secondByte) || GetEqualOperation(firstByte, secondByte))
