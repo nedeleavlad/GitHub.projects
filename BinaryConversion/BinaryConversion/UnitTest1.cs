@@ -21,6 +21,12 @@ namespace BinaryConversion
         }
 
         [TestMethod]
+        public void GetBiggerFactorial()
+        {
+            CollectionAssert.AreEqual(GetConversionToBinary(1), CalculateFactorial(GetOperationDivision(GetConversionToBinary(49), GetConversionToBinary(48))));
+        }
+
+        [TestMethod]
         public void GetEqual()
         {
             Assert.IsTrue(GetEqualOperation(GetConversionToBinary(14), GetConversionToBinary(14)));
@@ -71,6 +77,12 @@ namespace BinaryConversion
         }
 
         [TestMethod]
+        public void GetSmallFactorial()
+        {
+            CollectionAssert.AreEqual(GetConversionToBinary(24), CalculateFactorial(GetConversionToBinary(4)));
+        }
+
+        [TestMethod]
         public void IndicatePosition()
         {
             Assert.AreEqual(2, GetPosition(new byte[] { 1, 2, 3, 4 }, 2));
@@ -80,6 +92,19 @@ namespace BinaryConversion
         public void LeftShift()
         {
             CollectionAssert.AreEqual(GetConversionToBinary(45 << 1), GetLeftShift(GetConversionToBinary(45), 1));
+        }
+
+        [TestMethod]
+        public void OperationDivision()
+        {
+            CollectionAssert.AreEqual(GetConversionToBinary(11), GetOperationDivision(GetConversionToBinary(22), GetConversionToBinary(2)));
+            CollectionAssert.AreEqual(new byte[] { 0 }, GetOperationDivision(GetConversionToBinary(5), GetConversionToBinary(7)));
+        }
+
+        [TestMethod]
+        public void OperationMultiplication()
+        {
+            CollectionAssert.AreEqual(GetConversionToBinary(200), GetOperationMultiplication(GetConversionToBinary(100), GetConversionToBinary(2)));
         }
 
         [TestMethod]
@@ -100,6 +125,19 @@ namespace BinaryConversion
             CollectionAssert.AreEqual(GetConversionToBinary(15 >> 2), GetRightShift(GetConversionToBinary(15), 2));
         }
 
+        private byte[] CalculateFactorial(byte[] byteArray)
+        {
+            byte[] result = { 1 };
+            byte[] bytesOne = { 0 };
+            while (GetNotEqualOperation(byteArray, new byte[] { 0 }))
+            {
+                result = GetOperationMultiplication(byteArray, result);
+                byteArray = GetOperationSubstraction(byteArray, new byte[] { 1 });
+                byteArray = RemoveZeroes(byteArray);
+            }
+            return result;
+        }
+
         private byte[] ExecuteLogicOperation(byte[] firstArray, byte[] secondArray, string getOperator)
         {
             byte[] result = new byte[Math.Max(firstArray.Length, secondArray.Length)];
@@ -109,27 +147,6 @@ namespace BinaryConversion
             }
             Array.Reverse(result);
             result = RemoveZeroes(result);
-            return result;
-        }
-
-        private byte[] GetOperationAdition(byte[] firstByteArray, byte[] secondByteArray)
-        {
-            byte[] result = new byte[Math.Max(secondByteArray.Length, firstByteArray.Length)];
-            int counter = 0;
-            for (int i = 0; i < result.Length; i++)
-            {
-                var sum = (GetPosition(firstByteArray, i) + GetPosition(secondByteArray, i) + counter);
-                result[i] = (byte)(sum % 2);
-                counter = sum / 2;
-            }
-
-            if (counter == 1)
-            {
-                Array.Resize(ref result, result.Length + 1);
-                result[result.Length - 1] = (byte)counter;
-            }
-
-            Array.Reverse(result);
             return result;
         }
 
@@ -204,9 +221,55 @@ namespace BinaryConversion
             return (GetLessThanOperation(bytesOne, bytesTwo) || GetGreaterThanOperation(bytesOne, bytesTwo));
         }
 
+        private byte[] GetOperationAdition(byte[] firstByteArray, byte[] secondByteArray)
+        {
+            byte[] result = new byte[Math.Max(secondByteArray.Length, firstByteArray.Length)];
+            int counter = 0;
+            for (int i = 0; i < result.Length; i++)
+            {
+                var sum = (GetPosition(firstByteArray, i) + GetPosition(secondByteArray, i) + counter);
+                result[i] = (byte)(sum % 2);
+                counter = sum / 2;
+            }
+
+            if (counter == 1)
+            {
+                Array.Resize(ref result, result.Length + 1);
+                result[result.Length - 1] = (byte)counter;
+            }
+
+            Array.Reverse(result);
+            return result;
+        }
+
         private byte[] GetOperationAND(byte[] firstArray, byte[] secondArray)
         {
             return ExecuteLogicOperation(firstArray, secondArray, "AND");
+        }
+
+        private byte[] GetOperationDivision(byte[] firstByte, byte[] secondByte)
+        {
+            byte[] result = { 0 };
+            if (GetLessThanOperation(firstByte, secondByte))
+                return new byte[] { 0 };
+            while (GetGreaterThanOperation(firstByte, secondByte) || GetEqualOperation(firstByte, secondByte))
+            {
+                firstByte = GetOperationSubstraction(firstByte, secondByte);
+                result = GetOperationAdition(result, new byte[] { 1 });
+            }
+            return result;
+        }
+
+        private byte[] GetOperationMultiplication(byte[] firstArray, byte[] secondArray)
+        {
+            byte[] result = { 0 };
+            while (GetNotEqualOperation(firstArray, new byte[] { 0 }))
+            {
+                result = GetOperationAdition(secondArray, result);
+                firstArray = GetOperationSubstraction(firstArray, new byte[] { 1 });
+            }
+
+            return result;
         }
 
         private byte[] GetOperationNOT(byte[] byteArray)
@@ -260,8 +323,9 @@ namespace BinaryConversion
 
         private byte[] GetRightShift(byte[] array, int position)
         {
+            Array.Reverse(array);
             Array.Resize(ref array, array.Length - position);
-
+            Array.Reverse(array);
             return array;
         }
 
@@ -275,44 +339,6 @@ namespace BinaryConversion
             }
             bytes = GetRightShift(bytes, counter);
             return bytes;
-        }
-
-        [TestMethod]
-        public void OperationMultiplication()
-        {
-            CollectionAssert.AreEqual(GetConversionToBinary(200), GetOperationMultiplication(GetConversionToBinary(100), GetConversionToBinary(2)));
-        }
-
-        private byte[] GetOperationMultiplication(byte[] firstArray, byte[] secondArray)
-        {
-            byte[] result;
-            while (GetNotEqualOperation(firstArray, new byte[] { 0 }))
-            {
-                result = GetOperationAdition(secondArray, result);
-                firstArray = GetOperationSubstraction(firstArray, new byte[] { 1 });
-            }
-
-            return result;
-        }
-
-        [TestMethod]
-        public void OperationDivision()
-        {
-            CollectionAssert.AreEqual(GetConversionToBinary(11), GetOperationDivision(GetConversionToBinary(22), GetConversionToBinary(2)));
-            CollectionAssert.AreEqual(new byte[] { 0 }, GetOperationDivision(GetConversionToBinary(5), GetConversionToBinary(7)));
-        }
-
-        private byte[] GetOperationDivision(byte[] firstByte, byte[] secondByte)
-        {
-            byte[] result;
-            if (GetLessThanOperation(firstByte, secondByte))
-                return new byte[] { 0 };
-            while (GetGreaterThanOperation(firstByte, secondByte) || GetEqualOperation(firstByte, secondByte))
-            {
-                firstByte = GetOperationSubstraction(firstByte, secondByte);
-                result = GetOperationAdition(result, new byte[] { 1 });
-            }
-            return result;
         }
     }
 }
