@@ -23,7 +23,7 @@ namespace BinaryConversion
         [TestMethod]
         public void GetBiggerFactorial()
         {
-            CollectionAssert.AreEqual(GetConversionToBinary(1), CalculateFactorial(GetOperationDivision(GetConversionToBinary(49), GetConversionToBinary(48))));
+            CollectionAssert.AreEqual(GetConversionToBinary(49), GetOperationDivision(CalculateFactorial(GetConversionToBinary(49)), CalculateFactorial(GetConversionToBinary(48))));
         }
 
         [TestMethod]
