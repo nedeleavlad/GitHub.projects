@@ -1,5 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 
 namespace Alarm
 {
@@ -24,8 +23,28 @@ namespace Alarm
         }
 
         [TestMethod]
-        public void TestMethod1()
+        public void VerifyAlarms()
         {
+            var alarm = new Alarm[]
+                {
+                 new Alarm(DaysOfWeek.Monday, 8),
+            new Alarm(DaysOfWeek.Wednesday, 10),
+            new Alarm(DaysOfWeek.Friday,9),
+            new Alarm(DaysOfWeek.Thursday,7)
+                };
+
+            Assert.IsTrue(GetAlarm(alarm, DaysOfWeek.Monday, 8));
+            Assert.IsFalse(GetAlarm(alarm, DaysOfWeek.Friday, 12));
+        }
+
+        private bool GetAlarm(Alarm[] alarm, DaysOfWeek day, int hour)
+        {
+            for (int i = 0; i < alarm.Length; i++)
+            {
+                if ((alarm[i].day == day && (alarm[i].hour == hour)))
+                    return true;
+            }
+            return false;
         }
     }
 }
