@@ -37,6 +37,17 @@ namespace Alarm
             Assert.IsFalse(GetAlarm(alarm, DaysOfWeek.Friday, 12));
         }
 
+        [TestMethod]
+        public void CheckSameAlarmDifferentDay()
+        {
+            var alarm = new Alarm[] {
+                new Alarm(DaysOfWeek.Monday| DaysOfWeek.Tuesday|DaysOfWeek.Wednesday|DaysOfWeek.Saturday,10),
+                new Alarm(DaysOfWeek.Friday|DaysOfWeek.Thursday,12)
+            };
+
+            Assert.IsTrue(GetAlarm(alarm, DaysOfWeek.Friday | DaysOfWeek.Thursday, 12));
+        }
+
         private bool GetAlarm(Alarm[] alarm, DaysOfWeek day, int hour)
         {
             for (int i = 0; i < alarm.Length; i++)
