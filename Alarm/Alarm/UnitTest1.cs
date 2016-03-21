@@ -1,13 +1,21 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace Alarm
 {
     [TestClass]
     public class UnitTest1
     {
+        [Flags]
         public enum DaysOfWeek
         {
-            Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
+            Monday = 1,
+            Tuesday = 2,
+            Wednesday = 4,
+            Thursday = 8,
+            Friday = 16,
+            Saturday = 32,
+            Sunday = 64
         }
 
         private struct Alarm
@@ -38,14 +46,14 @@ namespace Alarm
         }
 
         [TestMethod]
-        public void CheckSameAlarmDifferentDay()
+        public void CheckSameAlarmDifferentDaywithFlags()
         {
             var alarm = new Alarm[] {
                 new Alarm(DaysOfWeek.Monday| DaysOfWeek.Tuesday|DaysOfWeek.Wednesday|DaysOfWeek.Saturday,10),
                 new Alarm(DaysOfWeek.Friday|DaysOfWeek.Thursday,12)
             };
 
-            Assert.IsTrue(GetAlarm(alarm, DaysOfWeek.Friday | DaysOfWeek.Thursday, 12));
+            Assert.IsTrue(GetAlarm(alarm, DaysOfWeek.Monday, 10));
         }
 
         private bool GetAlarm(Alarm[] alarm, DaysOfWeek day, int hour)
