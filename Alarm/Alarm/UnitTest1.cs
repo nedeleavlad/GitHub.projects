@@ -49,9 +49,9 @@ namespace Alarm
         public void CheckSameAlarmDifferentDaywithFlags()
         {
             var alarm = new Alarm[] {
-                new Alarm(DaysOfWeek.Monday| DaysOfWeek.Tuesday|DaysOfWeek.Wednesday|DaysOfWeek.Saturday,10),
-                new Alarm(DaysOfWeek.Friday|DaysOfWeek.Thursday,12)
-            };
+            new Alarm(DaysOfWeek.Monday| DaysOfWeek.Tuesday|DaysOfWeek.Wednesday|DaysOfWeek.Saturday,10),
+          new Alarm(DaysOfWeek.Friday|DaysOfWeek.Thursday,12)
+        };
 
             Assert.IsTrue(GetAlarm(alarm, DaysOfWeek.Monday, 10));
         }
@@ -60,7 +60,7 @@ namespace Alarm
         {
             for (int i = 0; i < alarm.Length; i++)
             {
-                if ((alarm[i].day == day && (alarm[i].hour == hour)))
+                if ((alarm[i].day & day) != 0 && (alarm[i].hour == hour))
                     return true;
             }
             return false;
