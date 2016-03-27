@@ -62,5 +62,29 @@ namespace Cyclist
             }
             return sum;
         }
+
+        [TestMethod]
+        public void MaxSpeedSecond()
+        {
+            var cyclist1 = new Cyclist("Gabi", new int[] { 3, 2, 1 }, 3);
+            Assert.AreEqual(1, GetSecondOfTheMaxSpeed(cyclist1));
+            var cyclist2 = new Cyclist("Gabi", new int[] { 1, 2, 3 }, 3);
+            Assert.AreEqual(3, GetSecondOfTheMaxSpeed(cyclist2));
+        }
+
+        private static int GetSecondOfTheMaxSpeed(Cyclist cyclist)
+        {
+            int contor = 0;
+            int second = 0;
+            for (int i = 0; i < cyclist.records.Length; i++)
+            {
+                if (contor < cyclist.records[i])
+                {
+                    contor = cyclist.records[i];
+                    second = i + 1;
+                }
+            }
+            return second;
+        }
     }
 }
