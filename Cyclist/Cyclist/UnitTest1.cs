@@ -20,6 +20,18 @@ namespace Cyclist
             }
         }
 
+        public struct Maximum
+        {
+            public string name;
+            public int second;
+
+            public Maximum(string name, int second)
+            {
+                this.name = name;
+                this.second = second;
+            }
+        }
+
         [TestMethod]
         public void CalculateTotalDistanceTraveled()
         {
@@ -61,6 +73,84 @@ namespace Cyclist
                 sum += cyclists.records[i];
             }
             return sum;
+        }
+
+        [TestMethod]
+        public void GetCyclistWithSpeedMaximum()
+        {
+            var cyclist = new Cyclist[] { new Cyclist("Bobo", new int[] { 1, 2, 3 }, 3), new Cyclist("Florin", new int[] { 1, 2, 4 }, 3), new Cyclist("Andrew", new int[] { 6, 3, 1 }, 3) };
+
+            Assert.AreEqual(new Maximum("Andrew", 1), CyclistMaxSpeed(cyclist));
+        }
+
+        private Maximum CyclistMaxSpeed(Cyclist[] cyclist)
+        {
+            int index = 0;
+
+            Maximum maximum = new Maximum { };
+
+            double result = 0;
+
+            double speed = 0;
+
+            for (int i = 0; i < cyclist.Length; i++
+                )
+            {
+                speed = GetMaximSpeedForOneCyclist(cyclist[i]);
+
+                if (result < speed)
+                {
+                    int second = 0;
+
+                    result = speed;
+
+                    index = i;
+
+                    second = GetSecondWhitMaximumSpeed(cyclist[index]);
+
+                    maximum = CompleteStructMax(cyclist, index);
+                }
+            }
+            return maximum;
+        }
+
+        private static Maximum CompleteStructMax(Cyclist[] cyclist, int index)
+        {
+            Maximum maximum = new Maximum { };
+
+            int second = 0;
+
+            second += GetSecondWhitMaximumSpeed(cyclist[index]);
+
+            maximum.name = cyclist[index].name;
+
+            maximum.second = GetSecondOfTheMaxSpeed(cyclist[index]);
+
+            return maximum;
+        }
+
+        private static int GetSecondWhitMaximumSpeed(Cyclist cyclist)
+        {
+            int counter = 0;
+            int second = 0;
+            for (int i = 0; i < cyclist.records.Length; i++)
+            {
+                if (0 < cyclist.records[i])
+                {
+                    counter = cyclist.records[i];
+                    second = i;
+                }
+            }
+            return second + 1;
+        }
+
+        private static int GetMaximSpeedForOneCyclist(Cyclist cyclist)
+        {
+            double distance = 0;
+
+            distance = Math.PI * cyclist.records[GetSecondOfTheMaxSpeed(cyclist) - 1] * cyclist.diameter;
+
+            return (int)(distance);
         }
 
         [TestMethod]
