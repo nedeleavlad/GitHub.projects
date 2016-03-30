@@ -176,5 +176,43 @@ namespace Cyclist
             }
             return second;
         }
+
+        [TestMethod]
+        public void AverageSpeed()
+        {
+            var cyclist = new Cyclist[] { new Cyclist("Bogdan", new int[] { 1, 2, 3 }, 3), new Cyclist("Vlad", new int[] { 1, 2, 4 }, 3), new Cyclist("Tim", new int[] { 1, 3, 6 }, 3) };
+            Assert.AreEqual("Tim", GetAverageSpeed(cyclist));
+        }
+
+        private string GetAverageSpeed(Cyclist[] cyclist)
+        {
+            double result = 0;
+
+            double counter = 0;
+
+            int index = 0;
+
+            for (int i = 0; i < cyclist.Length; i++)
+            {
+                counter = GetAverageSpeedOneCyclist(cyclist[i]);
+
+                if (result < counter)
+                {
+                    result = counter;
+                    index = i;
+                }
+            }
+
+            return cyclist[index].name;
+        }
+
+        private static double GetAverageSpeedOneCyclist(Cyclist cyclist)
+        {
+            int second = 0;
+
+            second = cyclist.records.Length;
+
+            return (GetNumberOfRotations(cyclist) / second);
+        }
     }
 }
