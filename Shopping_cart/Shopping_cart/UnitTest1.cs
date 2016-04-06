@@ -104,5 +104,21 @@ namespace Shopping_cart
             var NeW = new Product[] { new Product("Milk", 10), new Product("Tomatoes", 15) };
             CollectionAssert.AreEqual(NeW, RemoveMostExpensiveProduct(initial));
         }
+
+        private Product[] AddANewProduct(Product[] product, string name, int price)
+        {
+            Array.Resize(ref product, product.Length + 1);
+            product[product.Length - 1].price = price;
+            product[product.Length - 1].name = name;
+            return product;
+        }
+
+        [TestMethod]
+        public void AddAProduct()
+        {
+            var product = new Product[] { new Product("Milk", 10), new Product("Tomatoes", 25), new Product("Orange", 15) };
+            Product[] first = new Product[] { new Product("Milk", 10), new Product("Tomatoes", 25), new Product("Orange", 15), new Product("Coffee", 20) };
+            CollectionAssert.AreEqual(first, AddANewProduct(product, "Coffee", 20));
+        }
     }
 }
