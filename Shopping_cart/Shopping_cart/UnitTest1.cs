@@ -120,5 +120,17 @@ namespace Shopping_cart
             Product[] first = new Product[] { new Product("Milk", 10), new Product("Tomatoes", 25), new Product("Orange", 15), new Product("Coffee", 20) };
             CollectionAssert.AreEqual(first, AddANewProduct(product, "Coffee", 20));
         }
+
+        private double CalculateTheAveragePrice(Product[] product)
+        {
+            return GetSumOfPrices(product) / product.Length;
+        }
+
+        [TestMethod]
+        public void GetAveragePrice()
+        {
+            var product = new Product[] { new Product("Milk", 10), new Product("Sugar", 20), new Product("Orange", 30) };
+            Assert.AreEqual(20, CalculateTheAveragePrice(product));
+        }
     }
 }
