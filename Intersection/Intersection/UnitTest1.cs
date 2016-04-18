@@ -20,48 +20,47 @@ namespace Intersection
 
         public enum Route
         {
-            Up, Down, Left, Right
+            Right, Left, Down, Up
         }
 
         [TestMethod]
         public void VerifyPoint1()
         {
-            // Route[] way = new Route[]
-            //{
-            //  Route.Right,Route.Up,Route.Up,Route.Right,Route.Down,Route.Left
-            //};
+            Route[] direction = new Route[]
+           {    Route.Right, Route.Up, Route.Up, Route.Right,Route.Down,Route.Left
+           };
             var intersection = new Point(1, 1);
 
-            Assert.AreEqual(intersection, GetIntersectionPoint("RUURDL"));
+            Assert.AreEqual(intersection, GetIntersectionPoint(direction));
         }
 
         [TestMethod]
         public void VerifyPoint2()
         {
-            //  Route[] way = new Route[] {
-            //    Route.Up,Route.Up,Route.Right,Route.Down,Route.Down,Route.Left
-            //};
+            Route[] direction = new Route[]
+             {
+           Route.Up,Route.Up,Route.Right,Route.Down,Route.Down,Route.Left
+              };
             var intersection = new Point(0, 0);
-            Assert.AreEqual(intersection, GetIntersectionPoint("UURDDL"));
+            Assert.AreEqual(intersection, GetIntersectionPoint(direction));
         }
 
-        private Point GetIntersectionPoint(string way)
+        private Point GetIntersectionPoint(Route[] direction)
         {
             Point intersection = new Point(0, 0);
+            Point[] points = new Point[direction.Length];
 
-            Point[] points = { intersection };
-
-            Point[] Point = new Point[way.Length - 1];
-
-            foreach (char i in way)
+            for (int i = 0; i < direction.Length; i++)
             {
-                GetDirections(i, intersection);
+                GetDirections(direction[i], intersection);
 
-                if (CheckForIntersection(intersection, points))
+                for (int j = 0; j < points.Length; j++)
                 {
-                    return intersection;
+                    if (CheckForIntersection(points[j], points))
+                        return intersection;
                 }
             }
+
             return intersection;
         }
 
@@ -69,29 +68,29 @@ namespace Intersection
         {
             for (int j = 0; j < points.Length - 1; j++)
             {
-                if (points[j].abscis == reference.abscis && points[j].ordinate == reference.ordinate)
+                if ((points[j].abscis == reference.abscis) && (points[j].ordinate == reference.ordinate))
                     return true;
             }
             return false;
         }
 
-        public void GetDirections(char direction, Point way)
+        public void GetDirections(Route direction, Point way)
         {
             switch (direction)
             {
-                case 'R':
+                case Route.Right:
                     way = new Point(way.abscis + 1, way.ordinate);
                     break;
 
-                case 'L':
+                case Route.Left:
                     way = new Point(way.abscis - 1, way.ordinate);
                     break;
 
-                case 'D':
+                case Route.Down:
                     way = new Point(way.abscis, way.ordinate - 1);
                     break;
 
-                case 'U':
+                case Route.Up:
                     way = new Point(way.abscis, way.ordinate + 1);
                     break;
             }
