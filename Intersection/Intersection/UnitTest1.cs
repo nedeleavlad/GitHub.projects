@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 using System;
 
 namespace Intersection
@@ -52,21 +53,22 @@ namespace Intersection
 
             for (int i = 0; i < direction.Length; i++)
             {
-                GetDirections(direction[i], intersection);
+                GetDirections(direction[i], ref intersection);
 
-                for (int j = 0; j < points.Length; j++)
-                {
-                    if (CheckForIntersection(points[j], points))
-                        return intersection;
-                }
+                if (CheckForIntersection(points, ref intersection))
+                    return intersection;
+
+                points[i] = intersection;
+
+                Array.Resize(ref points, points.Length + 1);
             }
 
             return intersection;
         }
 
-        private bool CheckForIntersection(Point reference, Point[] points)
+        private bool CheckForIntersection(Point[] points, ref Point reference)
         {
-            for (int j = 0; j < points.Length - 1; j++)
+            for (int j = 0; j < points.Length; j++)
             {
                 if ((points[j].abscis == reference.abscis) && (points[j].ordinate == reference.ordinate))
                     return true;
@@ -74,7 +76,7 @@ namespace Intersection
             return false;
         }
 
-        public void GetDirections(Route direction, Point way)
+        public void GetDirections(Route direction, ref Point way)
         {
             switch (direction)
             {
