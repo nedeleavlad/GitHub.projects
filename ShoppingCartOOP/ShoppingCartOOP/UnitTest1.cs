@@ -18,7 +18,7 @@ namespace ShoppingCartOOP
 
         public int Sum(int sum)
         {
-            return sum = sum + this.price;
+            return sum + this.price;
         }
 
         public int ComparePrices(Product Reference)
@@ -30,17 +30,17 @@ namespace ShoppingCartOOP
             return 0;
         }
 
-        public void IncreaseQuantity(int quantity)
+        public int IncreaseQuantity(int quantity)
         {
-            this.quantity += quantity;
+            return this.quantity += quantity;
         }
 
-        public void DecreaseQuantity(int quantity)
+        public int DecreaseQuantity(int quantity)
         {
-            this.quantity -= quantity;
+            return this.quantity -= quantity;
         }
 
-        public int Total(int price, int quantity)
+        public int Total()
         {
             return this.quantity * this.price;
         }

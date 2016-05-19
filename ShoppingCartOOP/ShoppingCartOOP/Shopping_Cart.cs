@@ -49,7 +49,7 @@ namespace ShoppingCartOOP
             Array.Resize(ref products, products.Length - 1);
         }
 
-        public void RemoveAProduct()
+        public void RemoveMostExpensiveProduct()
         {
             int index = GetMostExpenive();
             RemoveSpecificPosition(index);
