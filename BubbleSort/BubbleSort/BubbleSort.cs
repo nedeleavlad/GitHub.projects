@@ -26,7 +26,7 @@ namespace BubbleSort
                 flag = false;
                 for (j = 0; j < givenArray.Length - 1; j++)
                 {
-                    if (givenArray[j] < givenArray[j + 1])
+                    if (givenArray[j] > givenArray[j + 1])
                     {
                         temp = givenArray[j];
                         givenArray[j] = givenArray[j + 1];

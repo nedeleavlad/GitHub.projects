@@ -11,7 +11,7 @@ namespace BubbleSort
         {
             BubbleSort numbers = new BubbleSort(new int[] { 23, 4, 5, 1 });
 
-            int[] output = new int[] { 23, 5, 4, 1 };
+            int[] output = new int[] { 1, 4, 5, 23 };
 
             CollectionAssert.AreEqual(output, numbers.ShowBubbleSortMethod(new int[] { 23, 4, 5, 1 }));
         }
