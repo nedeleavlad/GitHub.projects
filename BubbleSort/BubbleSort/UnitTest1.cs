@@ -9,11 +9,11 @@ namespace BubbleSort
         [TestMethod]
         public void BubbleSort()
         {
-            int[] numbers = new int[] { 2, 3, 56, 43, 87, 69 };
+            BubbleSort numbers = new BubbleSort(new int[] { 23, 4, 5, 1 });
 
-            int[] output = new int[] { 2, 3, 43, 56, 69, 87 };
+            int[] output = new int[] { 23, 5, 4, 1 };
 
-            CollectionAssert.AreEqual(output, numbers.);
+            CollectionAssert.AreEqual(output, numbers.ShowBubbleSortMethod(new int[] { 23, 4, 5, 1 }));
         }
     }
 }

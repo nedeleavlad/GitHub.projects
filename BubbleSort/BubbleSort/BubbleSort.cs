@@ -17,7 +17,26 @@ namespace BubbleSort
 
         public int[] ShowBubbleSortMethod(int[] givenArray)
         {
-            return new int[] { 2, 3, 43, 56, 69, 87 };
+            int j;
+            bool flag = true;
+            int temp;
+
+            while (flag)
+            {
+                flag = false;
+                for (j = 0; j < givenArray.Length - 1; j++)
+                {
+                    if (givenArray[j] < givenArray[j + 1])
+                    {
+                        temp = givenArray[j];
+                        givenArray[j] = givenArray[j + 1];
+                        givenArray[j + 1] = temp;
+                        flag = true;
+                    }
+                }
+            }
+
+            return givenArray;
         }
     }
 }
