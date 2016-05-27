@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,7 @@ namespace IList
     internal class List<T> : IList<T>
     {
         private T[] array = new T[] { };
-        private int _index;
+        private int index;
 
         public List()
         {
@@ -20,9 +21,9 @@ namespace IList
         {
             if (index < Count && index >= 0)
             {
-                if (_index <= array.Length)
+                if (this.index <= array.Length)
                     Array.Resize(ref array, array.Length * 2);
-                _index++;
+                this.index++;
                 for (int i = Count - 1; i > index; i--)
                 {
                     array[i] = array[i - 1];
@@ -35,7 +36,7 @@ namespace IList
         {
             get
             {
-                return _index;
+                return index;
             }
         }
 
@@ -47,7 +48,7 @@ namespace IList
                 {
                     array[i] = array[i + 1];
                 }
-                _index--;
+                this.index--;
             }
         }
 
@@ -69,26 +70,97 @@ namespace IList
         {
             if (Count == 0)
                 Array.Resize(ref array, array.Length + 1);
-            if (array.Length <= Count && _index == Count)
+            if (array.Length <= Count && index == Count)
                 Array.Resize(ref array, array.Length * 2);
 
-            array[_index] = item;
-            _index++;
+            array[index] = item;
+            index++;
         }
 
         public void Clear()
         {
-            _index = 0;
+            index = 0;
         }
 
         public bool IsReadOnly
         {
-            get { return false; }
+            get
+            {
+                return false;
+            }
+        }
+
+        public T this[int index]
+        {
+            get
+            {
+                return array[index];
+            }
+            set
+            {
+                array[index] = value;
+            }
         }
 
         public bool Remove(T item)
         {
             return true;
+        }
+
+        public void CopyTo(T[] givenArray, int index)
+        {
+            if (givenArray.Length <= array.Count())
+                Array.Resize(ref givenArray, givenArray.Count() + array.Count() + 1);
+
+            int j = index;
+            for (int i = 0; i < this.index; i++)
+            {
+                givenArray.SetValue(array[i], j++);
+            }
+        }
+
+        public bool Compare(T[] first, T[] second)
+        {
+            for (int i = 0; i < first.Length; i++)
+            {
+                if (!first[i].Equals(second[i]))
+                    return false;
+            }
+            return true;
+        }
+
+        public bool Contains(T item)
+        {
+            bool inList = false;
+            for (int i = 0; i < Count; i++)
+            {
+                if (array[i].Equals(item))
+                {
+                    inList = true;
+                    break;
+                }
+            }
+            return inList;
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            int counter = 0;
+            while (counter < Count)
+            {
+                yield return array[counter];
+                counter++;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            int counter = 0;
+            while (counter < Count)
+            {
+                yield return array[counter];
+                counter++;
+            }
         }
     }
 }
