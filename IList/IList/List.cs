@@ -12,11 +12,6 @@ namespace IList
         private T[] array = new T[] { };
         private int index;
 
-        public List()
-        {
-            this.array = array;
-        }
-
         public void Insert(int index, T item)
         {
             if (index < Count && index >= 0)
