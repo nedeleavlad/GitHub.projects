@@ -8,9 +8,9 @@ namespace IList
 {
     internal class QuickSort<T> : List<T> where T : IComparable
     {
-        private int[] givenArray;
+        private T[] givenArray;
 
-        private QuickSort(int[] array)
+        private QuickSort(T[] array)
         {
             this.givenArray = array;
         }
