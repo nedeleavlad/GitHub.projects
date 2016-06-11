@@ -18,5 +18,11 @@ namespace LinkedList
 
             next = null;
         }
+
+        public Node()
+        {
+            value = default(T);
+            next = null;
+        }
     }
 }
