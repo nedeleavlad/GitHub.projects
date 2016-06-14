@@ -8,9 +8,9 @@ namespace LinkedList
 {
     internal class Node<T>
     {
-        private T value;
+        public T value;
 
-        private Node<T> next;
+        public Node<T> next;
 
         public Node(T start)
         {
