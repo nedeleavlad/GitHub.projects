@@ -19,6 +19,11 @@ namespace LinkedList
             count = 0;
         }
 
+        public int Count
+        {
+            get { return count; }
+        }
+
         public T GetFirstElement()
         {
             return head.next.value;
@@ -39,13 +44,19 @@ namespace LinkedList
             count++;
         }
 
+        public void Clean()
+        {
+            head = null;
+            count = 0;
+        }
+
         public IEnumerator<T> GetEnumerator()
         {
-            var curr = head.next;
-            while (curr != null)
+            var item = head.next;
+            while (item != null)
             {
-                yield return curr.value;
-                curr = curr.next;
+                yield return item.value;
+                item = item.next;
             }
         }
 
