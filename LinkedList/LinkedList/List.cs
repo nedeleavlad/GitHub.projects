@@ -50,6 +50,21 @@ namespace LinkedList
             count = 0;
         }
 
+        public void Remove(T item)
+        {
+            Node<T> current = head;
+            while (current.next != null)
+            {
+                if (current.next.value.Equals(item))
+                {
+                    current.next = current.next.next;
+                    break;
+                }
+                else
+                    current = current.next;
+            }
+        }
+
         public IEnumerator<T> GetEnumerator()
         {
             var item = head.next;

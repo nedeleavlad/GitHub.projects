@@ -28,5 +28,20 @@ namespace LinkedList
             List2.Clean();
             Assert.AreEqual(0, List2.Count);
         }
+
+        [TestMethod]
+        public void RemoveSpecificItem()
+        {
+            LinkedList<int> list3 = new LinkedList<int>();
+
+            list3.AddOnFirstPosition(2);
+            list3.AddOnFirstPosition(3);
+            list3.AddOnFirstPosition(7);
+            list3.Remove(2);
+            int n = 0;
+            foreach (var x in list3) n++;
+
+            Assert.AreEqual(2, n);
+        }
     }
 }
