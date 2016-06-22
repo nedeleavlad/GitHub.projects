@@ -67,13 +67,13 @@ namespace LinkedList
 
         public void RemoveLast()
         {
-            Node<T> next = headNode;
-            T value;
-            if (next.next == null)
+            Node<T> current = headNode, last;
+            while (current != null)
             {
-                value = next.value;
-                next = null;
+                last = current;
+                current = current.next;
             }
+            last = null;
         }
 
         public void AddLast(T data)
