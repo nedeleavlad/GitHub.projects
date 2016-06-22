@@ -76,6 +76,30 @@ namespace LinkedList
             }
         }
 
+        public void AddLast(T data)
+        {
+            if (headNode == null)
+            {
+                headNode = new Node<T>();
+
+                headNode.value = data;
+                headNode.next = null;
+            }
+            else
+            {
+                Node<T> toAdd = new Node<T>();
+                toAdd.value = data;
+
+                Node<T> current = headNode;
+                while (current.next != null)
+                {
+                    current = current.next;
+                }
+
+                current.next = toAdd;
+            }
+        }
+
         public IEnumerator<T> GetEnumerator()
         {
             var item = headNode.next;

@@ -57,5 +57,16 @@ namespace LinkedList
             list1.AddOnFirstPosition(3);
             Assert.AreEqual(list1, list);
         }
+
+        [TestMethod]
+        public void AddLast()
+        {
+            LinkedList<int> list = new LinkedList<int>();
+            list.AddOnFirstPosition(1);
+            list.AddOnFirstPosition(2);
+            list.AddLast(3);
+
+            Assert.AreEqual(new LinkedList<int> { 2, 1, 3 }, list);
+        }
     }
 }
