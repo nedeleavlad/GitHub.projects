@@ -9,13 +9,13 @@ namespace LinkedList
 {
     internal class LinkedList<T> : IEnumerable<T>
     {
-        private Node<T> head;
+        private Node<T> headNode;
 
         private int count = 0;
 
         public LinkedList()
         {
-            head = new Node<T>();
+            headNode = new Node<T>();
             count = 0;
         }
 
@@ -26,18 +26,18 @@ namespace LinkedList
 
         public T GetFirstElement()
         {
-            return head.next.value;
+            return headNode.next.value;
         }
 
         public void AddOnFirstPosition(T node)
         {
-            Node<T> item = head;
+            Node<T> item = headNode;
 
             Node<T> newNode = new Node<T>(node);
 
-            item = head.next;
+            item = headNode.next;
 
-            head.next = newNode;
+            headNode.next = newNode;
 
             newNode.next = item;
 
@@ -46,13 +46,13 @@ namespace LinkedList
 
         public void Clean()
         {
-            head = null;
+            headNode = null;
             count = 0;
         }
 
         public void Remove(T item)
         {
-            Node<T> current = head;
+            Node<T> current = headNode;
             while (current.next != null)
             {
                 if (current.next.value.Equals(item))
@@ -65,9 +65,20 @@ namespace LinkedList
             }
         }
 
+        public void RemoveLast()
+        {
+            Node<T> next = headNode;
+            T value;
+            if (next.next == null)
+            {
+                value = next.value;
+                next = null;
+            }
+        }
+
         public IEnumerator<T> GetEnumerator()
         {
-            var item = head.next;
+            var item = headNode.next;
             while (item != null)
             {
                 yield return item.value;
