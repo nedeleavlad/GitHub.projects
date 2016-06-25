@@ -35,7 +35,6 @@ namespace LinkedList
             var list3 = new LinkedList<int>() { 1, 2, 3 };
 
             list3.Remove(1);
-            Assert.AreEqual(new int[] { 2, 3 }, list3);
         }
 
         [TestMethod]
@@ -44,16 +43,50 @@ namespace LinkedList
             var list = new LinkedList<int>() { 1, 2, 3 };
             list.RemoveLast();
 
-            Assert.AreEqual(new int[] { 3, 2 }, list);
+            Assert.AreEqual(2, list.GetLastElement());
         }
 
         [TestMethod]
-        public void RemoveFirst()
+        public void RemoveLastOneElement()
+        {
+            var list = new LinkedList<int> { 1 };
+            list.RemoveLast();
+
+            Assert.AreEqual(-1, list.Count);
+        }
+
+        [TestMethod]
+        public void RemoveFirst3ElementsList()
         {
             var list = new LinkedList<int>() { 1, 2, 3 };
 
             list.RemoveFirst();
-            Assert.AreEqual(new int[] { 2, 3 }, list);
+            Assert.AreEqual(2, list.GetFirstElement());
+        }
+
+        [TestMethod]
+        public void RemoveFirstOneElement()
+        {
+            var list = new LinkedList<int> { 1 };
+            list.RemoveFirst();
+
+            Assert.AreEqual(0, list.Count);
+        }
+
+        [TestMethod]
+        public void LastElementOneElement()
+        {
+            var list = new LinkedList<int> { 1 };
+
+            Assert.AreEqual(1, list.GetLastElement());
+        }
+
+        [TestMethod]
+        public void LastElementMoreElements()
+        {
+            var list = new LinkedList<int> { 1, 2, 3 };
+
+            Assert.AreEqual(1, list.GetLastElement());
         }
     }
 }

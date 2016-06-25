@@ -58,29 +58,20 @@ namespace LinkedList
         public void Remove(T item)
         {
             Node<T> current = head;
-            while (current.next != null)
-            {
-                if (current.next.value.Equals(item))
-                {
-                    current.next = current.next.next;
-                    break;
-                }
-                else
-                    current = current.next;
-            }
         }
 
         public void RemoveLast()
         {
             Node<T> current = head;
 
-            if (head.next == null) return;
+            if ((current.next == null) || (current.next.next == null))
+            {
+                Clean();
+            }
 
             while (current.next.next != null)
             {
                 current = current.next.next;
-
-                current.next.next = null;
             }
 
             current.next = null;
@@ -93,9 +84,24 @@ namespace LinkedList
             else
             {
                 head.next = head.next.next;
+
+                count--;
+            }
+        }
+
+        public T GetLastElement()
+        {
+            Node<T> current = head;
+
+            if (current.next == null) return head.value;
+            if (current.next.next == null) return current.next.value;
+
+            while (current.next.next != null)
+            {
+                current = current.next;
             }
 
-            count--;
+            return current.next.value;
         }
 
         public IEnumerator<T> GetEnumerator()
