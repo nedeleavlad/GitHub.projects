@@ -9,22 +9,22 @@ namespace LinkedList
         [TestMethod]
         public void FirstElement()
         {
-            LinkedList<int> List1 = new LinkedList<int>();
-            List1.AddOnFirstPosition(2);
-            List1.AddOnFirstPosition(3);
-            List1.AddOnFirstPosition(4);
-            List1.AddOnFirstPosition(10);
+            var List1 = new LinkedList<int>();
+            List1.AddFirst(2);
+            List1.AddFirst(3);
+            List1.AddFirst(4);
+            List1.AddFirst(10);
             Assert.IsTrue(List1.GetFirstElement().Equals(10));
         }
 
         [TestMethod]
         public void CleanList()
         {
-            LinkedList<string> List2 = new LinkedList<string>();
-            List2.AddOnFirstPosition("a");
-            List2.AddOnFirstPosition("b");
-            List2.AddOnFirstPosition("c");
-            List2.AddOnFirstPosition("r");
+            var List2 = new LinkedList<string>();
+            List2.AddFirst("a");
+            List2.AddFirst("b");
+            List2.AddFirst("c");
+            List2.AddFirst("r");
             List2.Clean();
             Assert.AreEqual(0, List2.Count);
         }
@@ -32,46 +32,28 @@ namespace LinkedList
         [TestMethod]
         public void RemoveSpecificItem()
         {
-            LinkedList<int> list3 = new LinkedList<int>();
+            var list3 = new LinkedList<int>() { 1, 2, 3 };
 
-            list3.AddOnFirstPosition(2);
-            list3.AddOnFirstPosition(3);
-            list3.AddOnFirstPosition(7);
-            list3.Remove(2);
-            int n = 0;
-            foreach (var x in list3) n++;
-
-            Assert.AreEqual(2, n);
+            list3.Remove(1);
+            Assert.AreEqual(new int[] { 2, 3 }, list3);
         }
 
         [TestMethod]
         public void RemoveLast()
         {
-            LinkedList<int> list = new LinkedList<int>();
-            list.AddOnFirstPosition(1);
-            list.AddOnFirstPosition(2);
-            list.AddOnFirstPosition(3);
+            var list = new LinkedList<int>() { 1, 2, 3 };
             list.RemoveLast();
-            LinkedList<int> list1 = new LinkedList<int>();
-            list1.AddOnFirstPosition(2);
-            list1.AddOnFirstPosition(3);
-            Assert.AreEqual(list1, list);
+
+            Assert.AreEqual(new int[] { 3, 2 }, list);
         }
 
         [TestMethod]
-        public void AddLast()
+        public void RemoveFirst()
         {
-            LinkedList<int> list = new LinkedList<int>();
-            list.AddOnFirstPosition(1);
-            list.AddOnFirstPosition(2);
-            list.AddLast(3);
+            var list = new LinkedList<int>() { 1, 2, 3 };
 
-            LinkedList<int> list1 = new LinkedList<int>();
-            list1.AddOnFirstPosition(2);
-            list1.AddOnFirstPosition(1);
-            list1.AddOnFirstPosition(3);
-
-            Assert.AreEqual(list1, list);
+            list.RemoveFirst();
+            Assert.AreEqual(new int[] { 2, 3 }, list);
         }
     }
 }

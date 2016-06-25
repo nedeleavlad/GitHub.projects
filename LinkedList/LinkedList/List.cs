@@ -9,13 +9,13 @@ namespace LinkedList
 {
     internal class LinkedList<T> : IEnumerable<T>
     {
-        private Node<T> headNode;
+        private Node<T> head;
 
         private int count = 0;
 
         public LinkedList()
         {
-            headNode = new Node<T>();
+            head = new Node<T>();
             count = 0;
         }
 
@@ -24,20 +24,25 @@ namespace LinkedList
             get { return count; }
         }
 
-        public T GetFirstElement()
+        public void Add(T data)
         {
-            return headNode.next.value;
+            AddFirst(data);
         }
 
-        public void AddOnFirstPosition(T node)
+        public T GetFirstElement()
         {
-            Node<T> item = headNode;
+            return head.next.value;
+        }
+
+        public void AddFirst(T node)
+        {
+            Node<T> item = head;
 
             Node<T> newNode = new Node<T>(node);
 
-            item = headNode.next;
+            item = head.next;
 
-            headNode.next = newNode;
+            head.next = newNode;
 
             newNode.next = item;
 
@@ -46,13 +51,13 @@ namespace LinkedList
 
         public void Clean()
         {
-            headNode = null;
+            head = null;
             count = 0;
         }
 
         public void Remove(T item)
         {
-            Node<T> current = headNode;
+            Node<T> current = head;
             while (current.next != null)
             {
                 if (current.next.value.Equals(item))
@@ -67,42 +72,35 @@ namespace LinkedList
 
         public void RemoveLast()
         {
-            Node<T> current = headNode, last;
-            while (current != null)
+            Node<T> current = head;
+
+            if (head.next == null) return;
+
+            while (current.next.next != null)
             {
-                last = current;
-                current = current.next;
+                current = current.next.next;
+
+                current.next.next = null;
             }
-            last = null;
+
+            current.next = null;
+            count--;
         }
 
-        public void AddLast(T data)
+        public void RemoveFirst()
         {
-            if (headNode == null)
-            {
-                headNode = new Node<T>();
-
-                headNode.value = data;
-                headNode.next = null;
-            }
+            if ((head.next == null) || (head.next.next == null)) Clean();
             else
             {
-                Node<T> toAdd = new Node<T>();
-                toAdd.value = data;
-
-                Node<T> current = headNode;
-                while (current.next != null)
-                {
-                    current = current.next;
-                }
-
-                current.next = toAdd;
+                head.next = head.next.next;
             }
+
+            count--;
         }
 
         public IEnumerator<T> GetEnumerator()
         {
-            var item = headNode.next;
+            var item = head.next;
             while (item != null)
             {
                 yield return item.value;
