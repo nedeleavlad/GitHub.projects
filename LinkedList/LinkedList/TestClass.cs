@@ -88,5 +88,13 @@ namespace LinkedList
 
             Assert.AreEqual(1, list.GetLastElement());
         }
+
+        [TestMethod]
+        public void Find()
+        {
+            LinkedList<string> list = new LinkedList<string>() { "a", "b", "c" };
+
+            Assert.IsTrue(list.FindSpecificElement("a"));
+        }
     }
 }

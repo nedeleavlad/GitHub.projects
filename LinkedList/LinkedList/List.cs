@@ -104,6 +104,18 @@ namespace LinkedList
             return current.next.value;
         }
 
+        public bool FindSpecificElement(T item)
+        {
+            Node<T> curent = head.next;
+            while (curent != head)
+            {
+                if (curent.value.Equals(item))
+                    return true;
+                curent = curent.next;
+            }
+            return false;
+        }
+
         public IEnumerator<T> GetEnumerator()
         {
             var item = head.next;
