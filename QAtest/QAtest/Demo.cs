@@ -18,7 +18,7 @@ namespace QAtest
         [Test]
         public void cssDemo()
         {
-            m_driver = new ChromeDriver("G:\\");
+            m_driver = new ChromeDriver("D:\\");
             m_driver.Url = "http://demo.guru99.com/test/guru99home/";
             m_driver.Manage().Window.Maximize();
 
