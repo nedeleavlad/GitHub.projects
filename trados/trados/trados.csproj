@@ -1,0 +1,110 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net47</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="JSON" Version="1.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.1.1" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.6.0" />
+    <PackageReference Include="xunit" Version="2.3.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
+    <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Ranorex.Bootstrapper">
+      <HintPath>C:\Program Files (x86)\Ranorex 8.2\Bin\Ranorex.Bootstrapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Ranorex.Core">
+      <HintPath>C:\Program Files (x86)\Ranorex 8.2\Bin\Ranorex.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Ranorex.Core.Resolver">
+      <HintPath>C:\Program Files (x86)\Ranorex 8.2\Bin\Ranorex.Core.Resolver.dll</HintPath>
+    </Reference>
+    <Reference Include="Ranorex.Plugin.Cef">
+      <HintPath>C:\Program Files (x86)\Ranorex 8.2\Bin\Ranorex.Plugin.Cef.dll</HintPath>
+    </Reference>
+    <Reference Include="Ranorex.Plugin.CefHost">
+      <HintPath>C:\Program Files (x86)\Ranorex 8.2\Bin\Ranorex.Plugin.CefHost.dll</HintPath>
+    </Reference>
+    <Reference Include="Ranorex.Plugin.ChromeWeb">
+      <HintPath>C:\Program Files (x86)\Ranorex 8.2\Bin\Ranorex.Plugin.ChromeWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Ranorex.Plugin.Delphi">
+      <HintPath>C:\Program Files (x86)\Ranorex 8.2\Bin\Ranorex.Plugin.Delphi.dll</HintPath>
+    </Reference>
+    <Reference Include="Ranorex.Plugin.FirefoxWeb">
+      <HintPath>C:\Program Files (x86)\Ranorex 8.2\Bin\Ranorex.Plugin.FirefoxWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Ranorex.Plugin.Flex">
+      <HintPath>C:\Program Files (x86)\Ranorex 8.2\Bin\Ranorex.Plugin.Flex.dll</HintPath>
+    </Reference>
+    <Reference Include="Ranorex.Plugin.Java">
+      <HintPath>C:\Program Files (x86)\Ranorex 8.2\Bin\Ranorex.Plugin.Java.dll</HintPath>
+    </Reference>
+    <Reference Include="Ranorex.Plugin.Mobile">
+      <HintPath>C:\Program Files (x86)\Ranorex 8.2\Bin\Ranorex.Plugin.Mobile.dll</HintPath>
+    </Reference>
+    <Reference Include="Ranorex.Plugin.Msaa">
+      <HintPath>C:\Program Files (x86)\Ranorex 8.2\Bin\Ranorex.Plugin.Msaa.dll</HintPath>
+    </Reference>
+    <Reference Include="Ranorex.Plugin.Office">
+      <HintPath>C:\Program Files (x86)\Ranorex 8.2\Bin\Ranorex.Plugin.Office.dll</HintPath>
+    </Reference>
+    <Reference Include="Ranorex.Plugin.Qt">
+      <HintPath>C:\Program Files (x86)\Ranorex 8.2\Bin\Ranorex.Plugin.Qt.dll</HintPath>
+    </Reference>
+    <Reference Include="Ranorex.Plugin.RawText">
+      <HintPath>C:\Program Files (x86)\Ranorex 8.2\Bin\Ranorex.Plugin.RawText.dll</HintPath>
+    </Reference>
+    <Reference Include="Ranorex.Plugin.Sap">
+      <HintPath>C:\Program Files (x86)\Ranorex 8.2\Bin\Ranorex.Plugin.Sap.dll</HintPath>
+    </Reference>
+    <Reference Include="Ranorex.Plugin.Uia">
+      <HintPath>C:\Program Files (x86)\Ranorex 8.2\Bin\Ranorex.Plugin.Uia.dll</HintPath>
+    </Reference>
+    <Reference Include="Ranorex.Plugin.Web">
+      <HintPath>C:\Program Files (x86)\Ranorex 8.2\Bin\Ranorex.Plugin.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Ranorex.Plugin.WebDriver">
+      <HintPath>C:\Program Files (x86)\Ranorex 8.2\Bin\Ranorex.Plugin.WebDriver.dll</HintPath>
+    </Reference>
+    <Reference Include="Ranorex.Plugin.Win32">
+      <HintPath>C:\Program Files (x86)\Ranorex 8.2\Bin\Ranorex.Plugin.Win32.dll</HintPath>
+    </Reference>
+    <Reference Include="Ranorex.Plugin.WinForms">
+      <HintPath>C:\Program Files (x86)\Ranorex 8.2\Bin\Ranorex.Plugin.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Ranorex.Plugin.WinFormsProxy">
+      <HintPath>C:\Program Files (x86)\Ranorex 8.2\Bin\Ranorex.Plugin.WinFormsProxy.dll</HintPath>
+    </Reference>
+    <Reference Include="Ranorex.Plugin.Wpf">
+      <HintPath>C:\Program Files (x86)\Ranorex 8.2\Bin\Ranorex.Plugin.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Ranorex.Plugin.WpfProxy">
+      <HintPath>C:\Program Files (x86)\Ranorex 8.2\Bin\Ranorex.Plugin.WpfProxy.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Assets\projects.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\Sample Project.sdlppx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="configs.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Assets\" />
+  </ItemGroup>
+
+</Project>
