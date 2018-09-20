@@ -1,4 +1,6 @@
 ﻿{
-  "timeout" :  35000,
-  "path": "C:\\Program Files (x86)\\SDL\\SDL Trados Studio\\Studio15\\SDLTradosStudio.exe"
+  "timeout": 35000,
+  "path": "C:\\Program Files (x86)\\SDL\\SDL Trados Studio\\Studio15\\SDLTradosStudio.exe",
+  "sourceFile": "D:\\Vladuuuut\\GITHUB\\JuniorMind_projects\\trados\\trados\\Assets\\Project 1",
+  "destinationFolder": "C:\\Users\\geone\\OneDrive\\Documents\\Katatonia"
 }

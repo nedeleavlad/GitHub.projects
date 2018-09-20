@@ -68,7 +68,6 @@ namespace trados
             Mouse.Click(closeBtn);
         }
 
-       
 
         
     }

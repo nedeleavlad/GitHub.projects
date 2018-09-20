@@ -18,9 +18,14 @@ namespace trados
 
             Timeout = Duration.FromMilliseconds(int.Parse(config["timeout"]));
             Path = config["path"];
+            SourceFolder = config["sourceFile"];
+            Destination = config["destinationFolder"];
         }
 
         public Duration Timeout { get; }
         public string Path { get; }
+
+        public string SourceFolder { get; }
+        public string Destination { get; }
     }
 }

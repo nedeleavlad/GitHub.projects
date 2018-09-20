@@ -55,7 +55,7 @@ namespace trados
 
 
 
-            Ranorex.Keyboard.Press(@"D:\Vladuuuut\GITHUB\JuniorMind_projects\trados\trados\Assets\Project 1");
+            Ranorex.Keyboard.Press(settings.SourceFolder);
 
             Mouse.Click(openBtn);
 
